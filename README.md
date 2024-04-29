@@ -57,6 +57,8 @@ Orders
     - CustomerId(Foreign key refering to the user)
     - Amount paid(float)
 
+    Iam Sandeep
+
 
 
 
