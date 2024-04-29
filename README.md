@@ -20,3 +20,46 @@ $ flask run
 # Flask WT Forms
 intigrity error
 form validation
+
+
+# Models
+User
+    - sl(autoincrement : int)
+    - id(randomly generated 7 digit number : int)
+    - First name(str)
+    - Last name(str)
+    - Email(str)
+    - Password(str)
+    - Address(str)
+    - Is email verified(boolean)
+
+Product
+    - sl(autoincrement : int)
+    - id(randomly generated 3 digit number : int)
+    - Name(str)
+    - Price(float)
+    - Description(str)
+    - Quantity(int)
+    - Category(str)
+
+Cart(Before placing order)
+    - CustomerId(Foreign key refering to Users table)
+    - ProductId(Foreign key refering to Products table)
+    - Quantity(int)
+
+Orderd items:
+    - OrderId
+    - ProductId(Foreign key refering to Products table)
+    - Quantity(int)
+
+Orders
+    - OrderId(randomly generate 7 digit number: int)
+    - CustomerId(Foreign key refering to the user)
+    - Amount paid(float)
+
+
+
+
+
+
+
