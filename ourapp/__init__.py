@@ -14,9 +14,13 @@ def create_app():
     from .auth import auth
     from .public import public
     from .user import user_bp
+    from .product import product_bp
+    from .cart import cart_bp
     app.register_blueprint(auth)
     app.register_blueprint(public)
     app.register_blueprint(user_bp)
+    app.register_blueprint(product_bp)
+    app.register_blueprint(cart_bp)
 
 
     # Initialize Flask extensions here
