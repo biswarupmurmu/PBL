@@ -23,6 +23,7 @@ class Product(db.Model):
     name = db.Column(db.String(100), nullable=False)
     price = db.Column(db.Float(100), nullable=False)
     description = db.Column(db.String(100), nullable=False)
+    image_url=db.Column(db.String(150), nullable=False)
 
     # New lines added
 
