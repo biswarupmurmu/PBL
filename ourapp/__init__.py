@@ -1,5 +1,7 @@
 from flask import Flask
-from .extensions import db, migrate, login_manager
+from .extensions import db, migrate, login_manager, admin
+from .models import Customer, Product
+from flask_admin.contrib.sqla import ModelView
 
 def create_app():
     app = Flask(__name__)
@@ -21,11 +23,17 @@ def create_app():
     db.init_app(app=app)
     migrate.init_app(app=app, db=db)
     login_manager.init_app(app=app)
+    admin.init_app(app=app)
 
 
     # Create the database tables
     with app.app_context():
         db.create_all()
+    
+
+    # Add views for each model
+    admin.add_view(ModelView(Customer, db.session))
+    admin.add_view(ModelView(Product, db.session))
 
 
     return app

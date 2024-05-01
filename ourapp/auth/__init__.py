@@ -1,7 +1,7 @@
 from flask import Blueprint, redirect, render_template, request, url_for
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import login_user, login_required, logout_user
-from ourapp.models import User
+from ourapp.models import Customer
 from ourapp import db
 from ourapp import login_manager
 from .form import SignupForm
@@ -13,7 +13,7 @@ def login():
     if request.method == "POST":
         email = request.form['email']
         password = request.form['password']
-        user = User.query.filter_by(email=email).first()
+        user = Customer.query.filter_by(email=email).first()
         if user and check_password_hash(user.password, password):
             login_user(user)
             next = request.args.get('next')
@@ -31,13 +31,11 @@ def signup():
             email = form.email.data
             password = form.password.data
 
-            print(fname, lname, email)
-
-            email_exists = User.query.filter_by(email=email).first()
+            email_exists = Customer.query.filter_by(email=email).first()
             if email_exists:
                 form.email.errors = ["Email already in use."]
             else:
-                user = User(fname=fname, lname=lname, email=email, password=generate_password_hash(password))
+                user = Customer(fname=fname, lname=lname, email=email, password=generate_password_hash(password))
                 db.session.add(user)
                 db.session.commit()
     return render_template("auth/signup.html", form=form)
@@ -52,4 +50,4 @@ def logout():
 login_manager.login_view = "auth.login"
 @login_manager.user_loader
 def load_user(user_id):
-    return User.query.get(int(user_id))
+    return Customer.query.get(int(user_id))
